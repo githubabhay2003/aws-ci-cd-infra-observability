@@ -1,1 +1,12 @@
-terraform/keys/jenkins-aws
+# Terraform cache, plugins, and providers
+**/.terraform/
+terraform/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Local SSH keys
+terraform/keys/*
+*.pem
+
