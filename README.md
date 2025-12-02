@@ -120,6 +120,7 @@ ansible-playbook -i ansible/inventory/dev ansible/site.yml
 cd terraform
 terraform destroy -var-file="environments/dev.tfvars"
 ```
+---
 ## 🔁 CI/CD Pipeline Flow
 
 1.  **Commit & push code**
@@ -130,7 +131,7 @@ terraform destroy -var-file="environments/dev.tfvars"
     * Runs the container
     * Prometheus scrapes metrics
     * Grafana dashboard updates automatically
-
+---
 ## 🧪 Verification
 
 After deployment, check:
@@ -142,6 +143,7 @@ After deployment, check:
 | **Prometheus** | `http://<public-ip>:9090` |
 | **Grafana** | `http://<public-ip>:3000` |
 
+---
 ## 📸 Screenshots
 
 ### Jenkins Web UI
@@ -156,6 +158,8 @@ After deployment, check:
 ### Application Running
 <img width="1919" height="1009" alt="Screenshot 2025-12-02 205303" src="https://github.com/user-attachments/assets/dfdf7fe6-c43f-4de4-8638-8c93759c8ab7" />
 
+---
+
 ## 🧩 Challenges & Learnings
 
 | Challenge | What Happened | How It Was Solved | Key Learning |
@@ -165,12 +169,16 @@ After deployment, check:
 | **Grafana dashboards were not persistent** | Dashboards disappeared after redeploys and required manual imports. | Implemented Grafana provisioning via Ansible, storing dashboards and datasources as code. | Observability must be infrastructure-as-code, not a manual UI task. |
 | **Ensuring full rebuild automation** | Some steps originally required logging into Jenkins or configuring services manually. | Added bootstrapping workflows, Terraform state backend, and secret handling structure. | A true DevOps pipeline must be reproducible with a single command end-to-end. |
 
+--- 
+
 ## 🔮 Future Enhancements
 
 - [ ] Slack/email notification integration
 - [ ] Build trend and deep analytics dashboards
 - [ ] Replace EC2 with Kubernetes (EKS or K3s)
 - [ ] Replace Docker with container registry + signing
+
+--- 
 
 ## 📂 Repository Structure
 
@@ -191,14 +199,19 @@ aws-ci-cd-infra-observability/
 │   └── Jenkinsfile
 └── docs/
 ```
+---
+
 ## 🤝 Contributing
 PRs are welcome! Please ensure that all changes pass the following checks before submitting:
 * `terraform fmt`
 * Ansible lint checks
 * Jenkins validation
+--- 
 
 ## 📄 License
 This project is licensed under the **MIT License**.
+
+--- 
 
 ## 👤 Author
 
