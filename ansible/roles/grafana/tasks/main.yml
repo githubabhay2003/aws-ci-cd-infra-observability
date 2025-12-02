@@ -46,7 +46,41 @@
     group: grafana
     mode: '0644'
   notify: restart grafana
-    
+
+- name: Ensure CI/CD dashboards directory exists
+  file:
+    path: /var/lib/grafana/dashboards/ci_cd
+    state: directory
+    owner: grafana
+    group: grafana
+    mode: '0755'
+
+- name: Deploy CI/CD Health dashboard JSON
+  copy:
+    src: "{{ playbook_dir }}/../grafana/dashboards/ci_cd_health.json"
+    dest: /var/lib/grafana/dashboards/ci_cd/ci_cd_health.json
+    owner: grafana
+    group: grafana
+    mode: '0644'
+  notify: restart grafana
+
+- name: Ensure Grafana provisioning directory for dashboards exists
+  file:
+    path: /etc/grafana/provisioning/dashboards
+    state: directory
+    owner: root
+    group: grafana
+    mode: '0755'
+
+- name: Deploy CI/CD dashboards provisioning config
+  template:
+    src: dashboards-ci-cd.yml.j2
+    dest: /etc/grafana/provisioning/dashboards/ci-cd-dashboards.yml
+    owner: root
+    group: grafana
+    mode: '0644'
+  notify: restart grafana
+
 - name: Ensure Grafana service is enabled and running
   service:
     name: grafana-server
