@@ -16,7 +16,6 @@ Automated end-to-end DevOps pipeline provisioned with Terraform and Ansible, run
 | Automated Grafana Provisioning | ✔ Enabled |
 | End-to-End DR (Destroy & Rebuild Validation) | ✔ Tested |
 
-> Additional GitHub Actions badges can be added later once repo pipelines exist.
 
 ---
 
