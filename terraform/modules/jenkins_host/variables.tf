@@ -1,9 +1,3 @@
-variable "aws_region" {
-  description = "AWS region for the deployment"
-  type        = string
-  default     = "us-east-1"
-}
-
 variable "environment" {
   description = "Deployment environment (dev or prod)"
   type        = string
@@ -12,7 +6,6 @@ variable "environment" {
 variable "instance_type" {
   description = "EC2 instance type for Jenkins and monitoring"
   type        = string
-  default     = "t3.small"
 }
 
 variable "my_ip" {
@@ -20,3 +13,17 @@ variable "my_ip" {
   type        = string
 }
 
+variable "vpc_id" {
+  description = "ID of the VPC where Jenkins host will be deployed"
+  type        = string
+}
+
+variable "public_subnet_id" {
+  description = "ID of the public subnet for Jenkins host"
+  type        = string
+}
+
+variable "public_key" {
+  description = "Public SSH key content to use for the EC2 key pair"
+  type        = string
+}

@@ -1,0 +1,21 @@
+groups:
+  - name: ci-cd-alerts
+    rules:
+      - alert: JenkinsDown
+        expr: up{job="jenkins"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Jenkins is down"
+          description: "The Jenkins Prometheus target (job='jenkins') has been down for more than 1 minute."
+
+      - alert: NodeExporterDown
+        expr: up{job="node_exporter"} == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Node exporter is down"
+          description: "The node_exporter target (job='node_exporter') has been down for more than 2 minutes."
+

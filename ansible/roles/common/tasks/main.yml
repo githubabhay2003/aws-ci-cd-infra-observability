@@ -1,0 +1,34 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Upgrade packages (safe upgrade)
+  apt:
+    upgrade: safe
+  register: apt_upgrade_result
+
+- name: Install common base packages
+  apt:
+    name:
+      - git
+      - curl
+      - wget
+      - unzip
+      - htop
+      - software-properties-common
+      - ca-certificates
+    state: present
+
+- name: Ensure chrony (time sync) is installed
+  apt:
+    name: chrony
+    state: present
+
+- name: Ensure chrony service is enabled and running
+  service:
+    name: chrony
+    state: started
+    enabled: yes
+

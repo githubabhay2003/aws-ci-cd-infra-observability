@@ -1,0 +1,64 @@
+---
+- name: Install Prometheus and Alertmanager
+  apt:
+    name:
+      - prometheus
+      - prometheus-alertmanager
+    state: present
+    update_cache: yes
+
+- name: Ensure Prometheus config directory exists
+  file:
+    path: /etc/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+
+- name: Ensure Prometheus rules directory exists
+  file:
+    path: /etc/prometheus/rules
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+
+- name: Deploy Prometheus configuration
+  template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  notify: restart prometheus
+
+- name: Deploy CI/CD alert rules
+  template:
+    src: ci_cd_alerts.yml.j2
+    dest: /etc/prometheus/rules/ci_cd_alerts.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  notify: restart prometheus
+
+- name: Deploy Alertmanager configuration
+  template:
+    src: alertmanager.yml.j2
+    dest: /etc/prometheus/alertmanager.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  notify: restart alertmanager
+
+- name: Ensure Prometheus service is enabled and running
+  service:
+    name: prometheus
+    state: started
+    enabled: yes
+
+- name: Ensure Alertmanager service is enabled and running
+  service:
+    name: prometheus-alertmanager
+    state: started
+    enabled: yes
+
