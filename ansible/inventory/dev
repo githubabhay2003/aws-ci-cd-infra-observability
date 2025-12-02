@@ -1,2 +1,2 @@
 [jenkins_host]
-jenkins-dev ansible_host=18.206.15.95 ansible_user=ubuntu ansible_ssh_private_key_file=/home/abhay/.ssh/jenkins-aws
+jenkins-dev ansible_host=3.95.254.73 ansible_user=ubuntu ansible_ssh_private_key_file=/home/abhay/.ssh/jenkins-aws

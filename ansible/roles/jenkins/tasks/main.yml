@@ -25,11 +25,14 @@
     name: jenkins
     state: present
   notify: restart jenkins
+    
 - name: Add jenkins user to docker group
   user:
     name: jenkins
     groups: docker
     append: yes
+  notify: restart jenkins
+
 - name: Ensure Jenkins service is enabled and running
   service:
     name: jenkins

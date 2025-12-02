@@ -71,7 +71,17 @@ resource "aws_security_group" "jenkins_sg" {
     cidr_blocks = ["${var.my_ip}/32"]
   }
 
-  egress {
+# App (Flask demo on 5000)
+  ingress {
+    description = "Demo app on port 5000"
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["${var.my_ip}/32"]
+  }
+
+
+egress {
     description = "Allow all outbound"
     from_port   = 0
     to_port     = 0
